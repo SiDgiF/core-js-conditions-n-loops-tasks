@@ -66,8 +66,12 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  return (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  );
 }
 
 /**
@@ -88,8 +92,15 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  return (
+    a > 0 &&
+    b > 0 &&
+    c > 0 &&
+    ((a === b && a !== c && a + b > c) ||
+      (a === c && a !== b && a + c > b) ||
+      (b === c && a !== b && b + c > a))
+  );
 }
 
 /**
@@ -106,8 +117,22 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  if (num < 1 || num > 39) {
+    throw new Error('The number must be between 1 and 39 inclusive.');
+  }
+  const ones = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+  const tens = ['X', 'XX', 'XXX'];
+  const onesDigit = num % 10;
+  const tensDigit = Math.floor(num / 10);
+  let romanNumeral = '';
+  if (tensDigit > 0) {
+    romanNumeral += tens[tensDigit - 1];
+  }
+  if (onesDigit > 0) {
+    romanNumeral += ones[onesDigit - 1];
+  }
+  return romanNumeral;
 }
 
 /**
